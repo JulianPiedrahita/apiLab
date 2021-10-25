@@ -26,7 +26,8 @@ app.get('/', (req, res) => {
 
 // all customers
 app.get('/customers', (req, res) => {
-  const sql = 'SELECT * FROM customers';
+  res.send('Welcome to my API!');
+  /*const sql = 'SELECT * FROM customers';
 
   client.query(sql, (error, results) => {
     if (error) throw error;
@@ -35,7 +36,7 @@ app.get('/customers', (req, res) => {
     } else {
       res.send('Not result');
     }
-  });
+  });*/
 });
 
 app.get('/customers/:id', (req, res) => {
