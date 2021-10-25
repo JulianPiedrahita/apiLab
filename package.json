@@ -1,20 +1,19 @@
 {
-  "name": "api",
+  "name": "node-postgresql-restapi",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "dev": "nodemon src/index.js"
   },
-  "author": "Julian Piedrahita",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parse": "^0.1.0",
     "express": "^4.17.1",
-    "mysql": "^2.18.1",
-    "pg": "^8.7.1"
+    "pg": "^7.12.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.14"
+    "nodemon": "^1.19.3"
   }
 }
