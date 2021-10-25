@@ -1,7 +1,5 @@
 const express = require('express');
-const mysql = require('mysql');
-const express = require('express');
-const mysql = require('mysql');
+const {Client} = require('pg');
 
 const bodyParser = require('body-parser');
 
@@ -11,13 +9,15 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// MySql
-const connection = mysql.createConnection({
+// postgres
+const connectionData ={
   host: 'fanny.db.elephantsql.com',
   user: 'gtbwgmaq',
   password: 'L1152IzJpGq2gtBcMNxckKUDi61V-_dx',
   database: 'gtbwgmaq'
-});
+}
+
+const client = new Client(connectionData)
 
 // Route
 app.get('/', (req, res) => {
@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 app.get('/customers', (req, res) => {
   const sql = 'SELECT * FROM customers';
 
-  connection.query(sql, (error, results) => {
+  client.query(sql, (error, results) => {
     if (error) throw error;
     if (results.length > 0) {
       res.json(results);
@@ -41,7 +41,7 @@ app.get('/customers', (req, res) => {
 app.get('/customers/:id', (req, res) => {
   const { id } = req.params;
   const sql = `SELECT * FROM customers WHERE id = ${id}`;
-  connection.query(sql, (error, result) => {
+  client.query(sql, (error, result) => {
     if (error) throw error;
 
     if (result.length > 0) {
@@ -60,7 +60,7 @@ app.post('/add', (req, res) => {
     city: req.body.city
   };
 
-  connection.query(sql, customerObj, error => {
+  client.query(sql, customerObj, error => {
     if (error) throw error;
     res.send('Customer created!');
   });
@@ -71,7 +71,7 @@ app.put('/update/:id', (req, res) => {
   const { name, city } = req.body;
   const sql = `UPDATE customers SET name = '${name}', city='${city}' WHERE id =${id}`;
 
-  connection.query(sql, error => {
+  client.query(sql, error => {
     if (error) throw error;
     res.send('Customer updated!');
   });
@@ -81,14 +81,14 @@ app.delete('/delete/:id', (req, res) => {
   const { id } = req.params;
   const sql = `DELETE FROM customers WHERE id= ${id}`;
 
-  connection.query(sql, error => {
+  client.query(sql, error => {
     if (error) throw error;
     res.send('Delete customer');
   });
 });
 
 // Check connect
-connection.connect(error => {
+client.connect(error => {
   if (error) throw error;
   console.log('Database server running!');
 });
