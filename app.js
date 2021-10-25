@@ -20,7 +20,7 @@ const connectionData ={
 const client = new Client(connectionData)
 
 // Route
-app.get('/customers', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Welcome to my API!');
 });
 
