@@ -13,10 +13,10 @@ app.use(bodyParser.json());
 
 // MySql
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'rootpass',
-  database: 'node20_mysql'
+  host: 'fanny.db.elephantsql.com',
+  user: 'gtbwgmaq',
+  password: 'L1152IzJpGq2gtBcMNxckKUDi61V-_dx',
+  database: 'gtbwgmaq'
 });
 
 // Route
