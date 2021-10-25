@@ -22,6 +22,16 @@ const client = new Client(connectionData)
 // Route
 app.get('/', (req, res) => {
   res.send('Welcome to my API!');
+  const sql = 'SELECT * FROM customers';
+
+  client.query(sql, (error, results) => {
+    if (error) throw error;
+    if (results.length > 0) {
+      res.json(results);
+    } else {
+      res.send('Not result');
+    }
+  });
 });
 
 // all customers
