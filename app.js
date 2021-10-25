@@ -57,6 +57,7 @@ app.post('/add', (req, res) => {
   const sql = 'INSERT INTO customers SET ?';
 
   const customerObj = {
+    id:req.body.id,
     name: req.body.name,
     city: req.body.city
   };
