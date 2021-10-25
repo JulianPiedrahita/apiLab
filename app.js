@@ -27,16 +27,8 @@ app.get('/', (req, res) => {
 // all customers
 app.get('/customers', (req, res) => {
   
-  const sql = 'SELECT * FROM public.customers';
-
-  client.query(sql, (error, results) => {
-    if (error) throw error;
-    if (results.length > 0) {
-      res.json(results);
-    } else {
-      res.send('Not result');
-    }
-  });
+  const response = await pool.query('SELECT * FROM public.customers');
+  res.status(200).json(response.rows);
 });
 
 app.get('/customers/:id', (req, res) => {
